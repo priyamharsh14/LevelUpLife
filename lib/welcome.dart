@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -8,12 +9,18 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  Future<String> _firstName;
+
   @override
   void initState() {
     super.initState();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
+    _firstName = _prefs.then((SharedPreferences prefs) {
+      return (prefs.getString('firstname') ?? "PLAYER");
+    });
   }
 
   @override
@@ -28,7 +35,7 @@ class _WelcomePageState extends State<WelcomePage> {
             child: VStack(
               [
                 Container(
-                  height: context.percentHeight * 25,
+                  height: context.percentHeight * 20,
                   width: context.percentWidth * 80,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.blue),
@@ -38,7 +45,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           Colors.blue[700].withOpacity(0.75),
                           Colors.blue[700].withOpacity(0.25),
                         ],
-                        radius: 1.2,
+                        radius: 1.25,
                       )),
                   child: Stack(
                     children: [
@@ -95,18 +102,49 @@ class _WelcomePageState extends State<WelcomePage> {
                           ),
                         ),
                       ),
-                      "[WELCOME, PLAYER]"
-                          .text
-                          .xl2
-                          .fontFamily("Oswald")
-                          .textStyle(TextStyle(shadows: [
-                            Shadow(
-                              blurRadius: 7.5,
-                              color: Colors.black,
-                            )
-                          ]))
-                          .color(Colors.white)
-                          .makeCentered(),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: context.percentWidth * 10),
+                        child: FutureBuilder(
+                          future: _firstName,
+                          builder: (context, snapshot) {
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.waiting:
+                                return const CircularProgressIndicator();
+                              default:
+                                if (snapshot.hasError) {
+                                  return "ERROR:\n${snapshot.error}"
+                                      .text
+                                      .xl2
+                                      .fontFamily("Oswald")
+                                      .textStyle(TextStyle(shadows: [
+                                        Shadow(
+                                          blurRadius: 7.5,
+                                          color: Colors.black,
+                                        )
+                                      ]))
+                                      .center
+                                      .color(Colors.white)
+                                      .makeCentered();
+                                } else {
+                                  return "[WELCOME, ${snapshot.data.toString()}]"
+                                      .text
+                                      .xl2
+                                      .fontFamily("Oswald")
+                                      .textStyle(TextStyle(shadows: [
+                                        Shadow(
+                                          blurRadius: 7.5,
+                                          color: Colors.black,
+                                        )
+                                      ]))
+                                      .center
+                                      .color(Colors.white)
+                                      .makeCentered();
+                                }
+                            }
+                          },
+                        ),
+                      ),
                     ],
                   ),
                 )
