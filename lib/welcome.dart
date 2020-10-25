@@ -17,6 +17,7 @@ class _WelcomePageState extends State<WelcomePage> {
     super.initState();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
     ]);
     _firstName = _prefs.then((SharedPreferences prefs) {
       return (prefs.getString('firstname') ?? "PLAYER");
