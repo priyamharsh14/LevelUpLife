@@ -95,7 +95,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           ),
                         ),
                       ),
-                      "[WELCOME, PRIYAM]"
+                      "[WELCOME, PLAYER]"
                           .text
                           .xl2
                           .fontFamily("Oswald")
