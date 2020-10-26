@@ -1,6 +1,6 @@
-import 'package:LevelUpLife/welcome.dart';
+import 'package:LevelUpLife/screens/welcome.dart';
+import 'package:LevelUpLife/screens/registration.dart';
 import 'package:flutter/material.dart';
-import 'screens/registration_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       initialRoute: 'WelcomePage',
       routes: {
         'WelcomePage': (context) => WelcomePage(),
-        RegistrationScreen.id: (context) => RegistrationScreen(),
+        'RegisterPage': (context) => RegistrationPage(),
       },
       home: WelcomePage(),
     );

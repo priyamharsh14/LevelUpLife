@@ -24,8 +24,7 @@ class DBHelper {
   Future _onCreate(Database db, int version) async {
     // USER INFO TABLE
     await db.execute('''CREATE TABLE userinfo (
-      id INTEGER PRIMARY KEY, firstname TEXT NOT NULL,
-      lastname TEXT NOT NULL, age INTEGER NOT NULL,
+      id INTEGER PRIMARY KEY, fullname TEXT NOT NULL, age INTEGER NOT NULL,
       gender TEXT NOT NULL
       )''');
     // SKILL INFO TABLE

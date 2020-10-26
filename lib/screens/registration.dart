@@ -10,17 +10,16 @@ enum gender {
   female,
 }
 
-class RegistrationScreen extends StatefulWidget {
-  static final String id = 'RegistrationScreen';
-
+class RegistrationPage extends StatefulWidget {
   @override
-  _RegistrationScreenState createState() => _RegistrationScreenState();
+  _RegistrationPageState createState() => _RegistrationPageState();
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen> {
+class _RegistrationPageState extends State<RegistrationPage> {
   gender selected;
   String name;
   double age;
+
   @override
   void initState() {
     super.initState();
@@ -39,8 +38,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         child: VStack(
           [
             Container(
-              height: context.percentHeight * 77,
-              width: context.percentWidth * 90,
+              height: context.percentHeight * 70,
+              width: context.percentWidth * 80,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.blue),
                 gradient: RadialGradient(
@@ -60,7 +59,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     quarterTurns: 0,
                     child: Image.asset(
                       'assets/images/corner.png',
-                      height: context.percentHeight * 10,
+                      height: context.percentHeight * 8,
                     ),
                   ),
                 ),
@@ -71,7 +70,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     quarterTurns: 1,
                     child: Image.asset(
                       'assets/images/corner.png',
-                      height: context.percentHeight * 10,
+                      height: context.percentHeight * 8,
                     ),
                   ),
                 ),
@@ -82,7 +81,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     quarterTurns: 3,
                     child: Image.asset(
                       'assets/images/corner.png',
-                      height: context.percentHeight * 10,
+                      height: context.percentHeight * 8,
                     ),
                   ),
                 ),
@@ -93,7 +92,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     quarterTurns: 2,
                     child: Image.asset(
                       'assets/images/corner.png',
-                      height: context.percentHeight * 10,
+                      height: context.percentHeight * 8,
                     ),
                   ),
                 ),
@@ -101,9 +100,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   padding: EdgeInsets.symmetric(
                       horizontal: context.percentWidth * 6,
                       vertical: context.percentWidth * 1.5),
-                  child: Column(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                  child: VStack(
+                    [
+                      SizedBox(
+                        height: context.percentHeight * 1.25,
+                      ),
                       "ENTER YOUR DETAILS"
                           .text
                           .xl3
@@ -118,14 +119,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           .color(Colors.white)
                           .makeCentered(),
                       SizedBox(
-                        height: context.percentWidth * 3,
-                        width: context.percentWidth * 70,
-                        child: Divider(
-                          color: Colors.white54,
-                        ),
+                        height: context.percentHeight * 0.5,
                       ),
-                     // SizedBox(height: context.percentWidth * 4),
-                      'NAME: '
+                      Container(
+                        color: Colors.blue[300],
+                        height: 1,
+                        width: context.percentWidth * 60,
+                      ),
+                      SizedBox(
+                        height: context.percentHeight * 2,
+                      ),
+                      'NAME:'
                           .text
                           .xl2
                           .fontFamily("Oswald")
@@ -138,39 +142,39 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           .center
                           .color(Colors.white)
                           .makeCentered(),
-                      SizedBox(height: context.percentWidth * 2),
+                      SizedBox(height: context.percentHeight * 1),
                       TextField(
                         onChanged: (value) {
                           setState(() {
                             name = value;
                           });
                         },
+                        autofocus: false,
+                        keyboardType: TextInputType.name,
+                        style: TextStyle(fontFamily: 'Oswald', fontSize: 18),
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
                           filled: true,
                           hintText: 'Enter your name',
-                          fillColor: Colors.white,
+                          fillColor: Colors.blue[200].withOpacity(0.85),
                           contentPadding: EdgeInsets.symmetric(
                               vertical: 10.0, horizontal: 20.0),
                           border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(32.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.blueAccent, width: 1.0),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(32.0)),
+                            borderSide:
+                                BorderSide(color: Colors.blue[300], width: 1),
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.blueAccent, width: 2.0),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(32.0)),
+                            borderSide:
+                                BorderSide(color: Colors.blue[100], width: 2),
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
                           ),
                         ),
                       ),
-                      SizedBox(height: context.percentWidth * 3),
+                      SizedBox(height: context.percentWidth * 5),
                       'GENDER: '
                           .text
                           .xl2
@@ -243,7 +247,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         divisions: 85,
                         suffix: " year",
                         showCursor: false,
-                        backgroundColor: Colors.white,
+                        backgroundColor: Colors.blue[200].withOpacity(0.75),
                         activeItemTextColor: Colors.black,
                         passiveItemsTextColor: Colors.blue,
                         onChanged: (value) {
@@ -253,16 +257,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         },
                       )),
                     ],
+                    alignment: MainAxisAlignment.center,
+                    crossAlignment: CrossAxisAlignment.center,
                   ),
                 ),
               ]),
             ),
-            SizedBox(height: context.percentWidth * 8),
+            SizedBox(height: context.percentHeight * 3),
             FlatButton(
-              onPressed: () {
-                // ignore: todo
-                //TODO: Add onPressed Functionality
-              },
+              onPressed: () {},
               child: Container(
                 height: context.percentHeight * 7,
                 width: context.percentWidth * 40,
@@ -274,76 +277,82 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       Colors.blue[700].withOpacity(0.75),
                       Colors.blue[700].withOpacity(0.50),
                     ],
-                    radius: 1.5,
+                    radius: 1.2,
                   ),
                 ),
-                child: Stack(children: [
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    child: RotatedBox(
-                      quarterTurns: 0,
-                      child: Image.asset(
-                        'assets/images/corner.png',
-                        height: context.percentHeight * 4.2,
+                child: Stack(
+                  children: [
+                    Positioned(
+                      left: context.percentHeight * 0.5,
+                      top: context.percentHeight * 0.5,
+                      child: RotatedBox(
+                        quarterTurns: 0,
+                        child: Container(
+                          color: Colors.blue[300],
+                          width: context.percentWidth * 4,
+                          height: 1,
+                        ),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: RotatedBox(
-                      quarterTurns: 1,
-                      child: Image.asset(
-                        'assets/images/corner.png',
-                        height: context.percentHeight * 4.2,
+                    Positioned(
+                      left: context.percentHeight * 0.5,
+                      top: context.percentHeight * 0.5,
+                      child: RotatedBox(
+                        quarterTurns: 1,
+                        child: Container(
+                          color: Colors.blue[300],
+                          width: context.percentWidth * 4,
+                          height: 1,
+                        ),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    left: 0,
-                    bottom: 0,
-                    child: RotatedBox(
-                      quarterTurns: 3,
-                      child: Image.asset(
-                        'assets/images/corner.png',
-                        height: context.percentHeight * 4.2,
+                    Positioned(
+                      right: context.percentHeight * 0.5,
+                      bottom: context.percentHeight * 0.5,
+                      child: RotatedBox(
+                        quarterTurns: 0,
+                        child: Container(
+                          color: Colors.blue[300],
+                          width: context.percentWidth * 4,
+                          height: 1,
+                        ),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    child: RotatedBox(
-                      quarterTurns: 2,
-                      child: Image.asset(
-                        'assets/images/corner.png',
-                        height: context.percentHeight * 4.2,
+                    Positioned(
+                      right: context.percentHeight * 0.5,
+                      bottom: context.percentHeight * 0.5,
+                      child: RotatedBox(
+                        quarterTurns: 1,
+                        child: Container(
+                          color: Colors.blue[300],
+                          width: context.percentWidth * 4,
+                          height: 1,
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: context.percentWidth * 10),
-                    child: "PROCEED"
-                        .text
-                        .xl
-                        .fontFamily("Oswald")
-                        .textStyle(TextStyle(shadows: [
-                          Shadow(
-                            blurRadius: 7.5,
-                            color: Colors.black,
-                          )
-                        ]))
-                        .center
-                        .color(Colors.yellow[600])
-                        .makeCentered(),
-                  ),
-                ]),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: context.percentWidth * 10),
+                      child: "PROCEED"
+                          .text
+                          .xl
+                          .fontFamily("Oswald")
+                          .textStyle(TextStyle(shadows: [
+                            Shadow(
+                              blurRadius: 7.5,
+                              color: Colors.black,
+                            )
+                          ]))
+                          .center
+                          .color(Colors.yellow[600])
+                          .makeCentered(),
+                    )
+                  ],
+                ),
               ),
             ),
           ],
-          alignment: MainAxisAlignment.end,
+          alignment: MainAxisAlignment.center,
           crossAlignment: CrossAxisAlignment.center,
         ),
       ),
