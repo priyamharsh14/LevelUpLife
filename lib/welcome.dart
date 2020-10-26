@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/animation.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/animation.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -30,10 +30,11 @@ class _WelcomePageState extends State<WelcomePage>
 
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 1),
+      duration: Duration(milliseconds: 500),
     );
 
-    animation = CurvedAnimation(parent: controller, curve: Curves.easeInOutCubic);
+    animation =
+        CurvedAnimation(parent: controller, curve: Curves.easeInOutCubic);
     controller.forward();
     controller.addListener(() {
       setState(() {});
@@ -60,7 +61,7 @@ class _WelcomePageState extends State<WelcomePage>
                 ScaleTransition(
                   scale: animation,
                   child: Container(
-                    height: context.percentHeight * 20,
+                    height: context.percentHeight * 22.5,
                     width: context.percentWidth * 80,
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.blue),
