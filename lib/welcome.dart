@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/animation.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -11,9 +11,6 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage>
     with TickerProviderStateMixin {
-  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  Future<String> _firstName;
-
   AnimationController controller;
   Animation<double> animation;
 
@@ -22,11 +19,7 @@ class _WelcomePageState extends State<WelcomePage>
     super.initState();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
     ]);
-    _firstName = _prefs.then((SharedPreferences prefs) {
-      return (prefs.getString('firstname') ?? "PLAYER");
-    });
 
     controller = AnimationController(
       vsync: this,
@@ -131,45 +124,19 @@ class _WelcomePageState extends State<WelcomePage>
                         Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: context.percentWidth * 10),
-                          child: FutureBuilder(
-                            future: _firstName,
-                            builder: (context, snapshot) {
-                              switch (snapshot.connectionState) {
-                                case ConnectionState.waiting:
-                                  return const CircularProgressIndicator();
-                                default:
-                                  if (snapshot.hasError) {
-                                    return "ERROR:\n${snapshot.error}"
-                                        .text
-                                        .xl2
-                                        .fontFamily("Oswald")
-                                        .textStyle(TextStyle(shadows: [
-                                          Shadow(
-                                            blurRadius: 7.5,
-                                            color: Colors.black,
-                                          )
-                                        ]))
-                                        .center
-                                        .color(Colors.white)
-                                        .makeCentered();
-                                  } else {
-                                    return "[WELCOME, ${snapshot.data.toString()}]"
-                                        .text
-                                        .xl2
-                                        .fontFamily("Oswald")
-                                        .textStyle(TextStyle(shadows: [
-                                          Shadow(
-                                            blurRadius: 7.5,
-                                            color: Colors.black,
-                                          )
-                                        ]))
-                                        .center
-                                        .color(Colors.white)
-                                        .makeCentered();
-                                  }
-                              }
-                            },
-                          ),
+                          child: "[WELCOME, PLAYER]"
+                              .text
+                              .xl2
+                              .fontFamily("Oswald")
+                              .textStyle(TextStyle(shadows: [
+                                Shadow(
+                                  blurRadius: 7.5,
+                                  color: Colors.black,
+                                )
+                              ]))
+                              .center
+                              .color(Colors.white)
+                              .makeCentered(),
                         ),
                       ],
                     ),
