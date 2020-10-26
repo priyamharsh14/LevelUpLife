@@ -23,6 +23,42 @@ class DBHelper {
   }
 
   Future _onCreate(Database db, int version) async {
-    // await db.execute();
+    await db.execute('''CREATE TABLE userinfo (
+      id INTEGER PRIMARY KEY, firstname TEXT NOT NULL,
+      lastname TEXT NOT NULL, age INTEGER NOT NULL,
+      gender TEXT NOT NULL
+      )''');
+  }
+
+  // Helper Functions
+  Future<int> getUserCount() async {
+    Database db = await instance.database;
+    return Sqflite.firstIntValue(
+        await db.rawQuery('SELECT COUNT(*) FROM userinfo'));
+  }
+
+  Future<Map<String, dynamic>> getUserInfo() async {
+    Database db = await instance.database;
+    List<Map<String, dynamic>> rows = await db.query("userinfo");
+    return rows[0];
+  }
+
+  Future<int> insertUser(Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    return await db.insert(
+      "userinfo",
+      row,
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<int> updateUser(Map<String, dynamic> row) async {
+    Database db = await instance.database;
+    return await db.update(
+      "userinfo",
+      row,
+      where: 'id = ?',
+      whereArgs: [row['id']],
+    );
   }
 }
