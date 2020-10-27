@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/animation.dart';
 import 'package:velocity_x/velocity_x.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
+import 'package:delayed_display/delayed_display.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -54,7 +54,7 @@ class _WelcomePageState extends State<WelcomePage>
                 ScaleTransition(
                   scale: animation,
                   child: Container(
-                    height: context.percentHeight * 22.5,
+                    height: context.percentHeight * 20,
                     width: context.percentWidth * 80,
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.blue),
@@ -64,19 +64,10 @@ class _WelcomePageState extends State<WelcomePage>
                             Colors.blue[700].withOpacity(0.75),
                             Colors.blue[700].withOpacity(0.25),
                           ],
-                          radius: 1.25,
+                          radius: 1.2,
                         )),
                     child: Stack(
                       children: [
-                        Positioned(
-                          child: Icon(
-                            Icons.close,
-                            color: Colors.blue[200],
-                            size: context.percentHeight * 2.5,
-                          ),
-                          right: context.percentWidth * 4,
-                          top: context.percentHeight * 2,
-                        ),
                         Positioned(
                           top: 0,
                           left: 0,
@@ -141,7 +132,104 @@ class _WelcomePageState extends State<WelcomePage>
                       ],
                     ),
                   ),
-                )
+                ),
+                SizedBox(
+                  height: context.percentHeight * 5,
+                ),
+                FlatButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'RegisterPage');
+                  },
+                  child: DelayedDisplay(
+                    delay: Duration(seconds: 2),
+                    slidingCurve: Curves.linearToEaseOut,
+                    slidingBeginOffset: Offset(0, 0),
+                    child: Container(
+                      height: context.percentHeight * 7,
+                      width: context.percentWidth * 40,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        gradient: RadialGradient(
+                          colors: [
+                            Colors.blue[700],
+                            Colors.blue[700].withOpacity(0.75),
+                            Colors.blue[700].withOpacity(0.50),
+                          ],
+                          radius: 1.2,
+                        ),
+                      ),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            left: context.percentHeight * 0.5,
+                            top: context.percentHeight * 0.5,
+                            child: RotatedBox(
+                              quarterTurns: 0,
+                              child: Container(
+                                color: Colors.blue[300],
+                                width: context.percentWidth * 4,
+                                height: 1,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            left: context.percentHeight * 0.5,
+                            top: context.percentHeight * 0.5,
+                            child: RotatedBox(
+                              quarterTurns: 1,
+                              child: Container(
+                                color: Colors.blue[300],
+                                width: context.percentWidth * 4,
+                                height: 1,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            right: context.percentHeight * 0.5,
+                            bottom: context.percentHeight * 0.5,
+                            child: RotatedBox(
+                              quarterTurns: 0,
+                              child: Container(
+                                color: Colors.blue[300],
+                                width: context.percentWidth * 4,
+                                height: 1,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            right: context.percentHeight * 0.5,
+                            bottom: context.percentHeight * 0.5,
+                            child: RotatedBox(
+                              quarterTurns: 1,
+                              child: Container(
+                                color: Colors.blue[300],
+                                width: context.percentWidth * 4,
+                                height: 1,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: context.percentWidth * 10),
+                            child: "[PROCEED]"
+                                .text
+                                .xl
+                                .fontFamily("Oswald")
+                                .textStyle(TextStyle(shadows: [
+                                  Shadow(
+                                    blurRadius: 7.5,
+                                    color: Colors.black,
+                                  )
+                                ]))
+                                .center
+                                .color(Colors.yellow[600])
+                                .makeCentered(),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ],
               alignment: MainAxisAlignment.center,
               crossAlignment: CrossAxisAlignment.center,

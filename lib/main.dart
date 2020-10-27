@@ -1,4 +1,5 @@
-import 'package:LevelUpLife/welcome.dart';
+import 'package:LevelUpLife/screens/welcome.dart';
+import 'package:LevelUpLife/screens/registration.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       initialRoute: 'WelcomePage',
       routes: {
         'WelcomePage': (context) => WelcomePage(),
+        'RegisterPage': (context) => RegistrationPage(),
       },
       home: WelcomePage(),
     );
