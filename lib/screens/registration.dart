@@ -133,7 +133,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: context.percentWidth * 6,
-                      vertical: context.percentWidth * 1.5),
+                      vertical: context.percentHeight * 1.5),
                   child: VStack(
                     [
                       SizedBox(
@@ -206,7 +206,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: context.percentWidth * 5),
+                      SizedBox(height: context.percentHeight * 1),
                       'GENDER: '
                           .text
                           .xl2
@@ -258,7 +258,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           ],
                         ),
                       ),
-                      SizedBox(height: context.percentWidth * 2),
+                      SizedBox(height: context.percentHeight * 1),
                       'AGE: '
                           .text
                           .xl2
