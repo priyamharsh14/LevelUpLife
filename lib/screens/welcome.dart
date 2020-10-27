@@ -1,3 +1,4 @@
+import 'package:LevelUpLife/DB_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/animation.dart';
@@ -42,6 +43,18 @@ class _WelcomePageState extends State<WelcomePage>
 
   @override
   Widget build(BuildContext context) {
+    bool _isNewUser = false;
+    final dbHelper = DBHelper.instance;
+
+    Future<String> _getDisplayName() async {
+      Map<String, dynamic> row = await dbHelper.getUserInfo();
+      if (row == null) {
+        _isNewUser = true;
+        return "PLAYER";
+      }
+      return row['fullname'].toString().split(" ")[0].toUpperCase();
+    }
+
     return Material(
       child: Stack(
         children: [
@@ -115,19 +128,47 @@ class _WelcomePageState extends State<WelcomePage>
                         Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: context.percentWidth * 10),
-                          child: "[WELCOME, PLAYER]"
-                              .text
-                              .xl2
-                              .fontFamily("Oswald")
-                              .textStyle(TextStyle(shadows: [
-                                Shadow(
-                                  blurRadius: 7.5,
-                                  color: Colors.black,
-                                )
-                              ]))
-                              .center
-                              .color(Colors.white)
-                              .makeCentered(),
+                          child: FutureBuilder(
+                            future: _getDisplayName(),
+                            builder: (context, snapshot) {
+                              switch (snapshot.connectionState) {
+                                case ConnectionState.waiting:
+                                  return const CircularProgressIndicator(
+                                    backgroundColor: Colors.blueAccent,
+                                  ).centered();
+                                default:
+                                  if (snapshot.hasError) {
+                                    return "[ERROR]\n${snapshot.error.toString()}"
+                                        .text
+                                        .lg
+                                        .fontFamily("Oswald")
+                                        .textStyle(TextStyle(shadows: [
+                                          Shadow(
+                                            blurRadius: 7.5,
+                                            color: Colors.black,
+                                          )
+                                        ]))
+                                        .center
+                                        .color(Colors.white)
+                                        .makeCentered();
+                                  } else {
+                                    return "[WELCOME, ${snapshot.data}]"
+                                        .text
+                                        .xl2
+                                        .fontFamily("Oswald")
+                                        .textStyle(TextStyle(shadows: [
+                                          Shadow(
+                                            blurRadius: 7.5,
+                                            color: Colors.black,
+                                          )
+                                        ]))
+                                        .center
+                                        .color(Colors.white)
+                                        .makeCentered();
+                                  }
+                              }
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -138,7 +179,11 @@ class _WelcomePageState extends State<WelcomePage>
                 ),
                 FlatButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, 'RegisterPage');
+                    if (_isNewUser) {
+                      Navigator.pushNamed(context, 'RegisterPage');
+                    } else {
+                      // proceed to dashboard
+                    }
                   },
                   child: DelayedDisplay(
                     delay: Duration(seconds: 2),
