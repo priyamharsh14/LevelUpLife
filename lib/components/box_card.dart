@@ -5,27 +5,28 @@ class BoxCard extends StatelessWidget {
   final String label;
   final IconData icon;
   final Color color;
+  final double height;
+  final double width;
 
-  BoxCard({this.icon, this.label, this.color});
+  BoxCard({this.icon, this.label, this.color, this.height, this.width});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10.0),
+      height: height,
+      width: width,
+      margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15.0),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.white),
         color: color,
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          GestureDetector(
-            child: Icon(
-              icon,
-              size: 25.0,
-              color: Colors.white,
-            ),
+      child: VStack(
+        [
+          Icon(
+            icon,
+            size: 25.0,
+            color: Colors.white,
           ),
           SizedBox(
             height: 7.0,
@@ -42,6 +43,8 @@ class BoxCard extends StatelessWidget {
               .color(Colors.white)
               .makeCentered(),
         ],
+        alignment: MainAxisAlignment.center,
+        crossAlignment: CrossAxisAlignment.center,
       ),
     );
   }

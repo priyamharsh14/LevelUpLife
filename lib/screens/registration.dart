@@ -137,7 +137,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   child: VStack(
                     [
                       SizedBox(
-                        height: context.percentHeight * 1.25,
+                        height: context.percentHeight * 1.5,
                       ),
                       "[ENTER YOUR DETAILS]"
                           .text
@@ -153,7 +153,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           .color(Colors.white)
                           .makeCentered(),
                       SizedBox(
-                        height: context.percentHeight * 0.5,
+                        height: context.percentHeight * 1,
                       ),
                       Container(
                         color: Colors.blue[300],
@@ -161,7 +161,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         width: context.percentWidth * 60,
                       ),
                       SizedBox(
-                        height: context.percentHeight * 2,
+                        height: context.percentHeight * 1,
                       ),
                       'NAME:'
                           .text
@@ -220,44 +220,40 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           .center
                           .color(Colors.white)
                           .makeCentered(),
-                      Expanded(
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    selected = gender.male;
-                                  });
-                                },
-                                child: BoxCard(
-                                  icon: FontAwesomeIcons.mars,
-                                  label: 'MALE',
-                                  color: selected == gender.male
-                                      ? Colors.lightBlue[400]
-                                      : Colors.blue[600],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    selected = gender.female;
-                                  });
-                                },
-                                child: BoxCard(
-                                  icon: FontAwesomeIcons.venus,
-                                  label: 'FEMALE',
-                                  color: selected == gender.female
-                                      ? Colors.lightBlue[400]
-                                      : Colors.blue[600],
-                                ),
-                              ),
-                            ),
-                          ],
+                      HStack([
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selected = gender.male;
+                            });
+                          },
+                          child: BoxCard(
+                            height: context.percentHeight * 15,
+                            width: context.percentWidth * 25,
+                            icon: FontAwesomeIcons.mars,
+                            label: 'MALE',
+                            color: selected == gender.male
+                                ? Colors.lightBlue[400]
+                                : Colors.blue[600],
+                          ),
                         ),
-                      ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selected = gender.female;
+                            });
+                          },
+                          child: BoxCard(
+                            height: context.percentHeight * 15,
+                            width: context.percentWidth * 25,
+                            icon: FontAwesomeIcons.venus,
+                            label: 'FEMALE',
+                            color: selected == gender.female
+                                ? Colors.lightBlue[400]
+                                : Colors.blue[600],
+                          ),
+                        )
+                      ]),
                       SizedBox(height: context.percentHeight * 1),
                       'AGE: '
                           .text
@@ -287,6 +283,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           age = value;
                         },
                       )),
+                      Container(
+                        color: Colors.blue[300],
+                        height: 1,
+                        width: context.percentWidth * 60,
+                      ),
                     ],
                     alignment: MainAxisAlignment.center,
                     crossAlignment: CrossAxisAlignment.center,
