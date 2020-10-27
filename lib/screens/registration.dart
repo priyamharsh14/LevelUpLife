@@ -105,7 +105,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       SizedBox(
                         height: context.percentHeight * 1.25,
                       ),
-                      "ENTER YOUR DETAILS"
+                      "[ENTER YOUR DETAILS]"
                           .text
                           .xl3
                           .fontFamily("Oswald")
@@ -333,7 +333,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: context.percentWidth * 10),
-                      child: "PROCEED"
+                      child: "[PROCEED]"
                           .text
                           .xl
                           .fontFamily("Oswald")

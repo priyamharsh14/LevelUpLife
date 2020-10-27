@@ -211,7 +211,7 @@ class _WelcomePageState extends State<WelcomePage>
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: context.percentWidth * 10),
-                            child: "PROCEED"
+                            child: "[PROCEED]"
                                 .text
                                 .xl
                                 .fontFamily("Oswald")
