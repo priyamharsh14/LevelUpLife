@@ -1,3 +1,4 @@
+import 'package:LevelUpLife/DB_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -20,12 +21,45 @@ class _RegistrationPageState extends State<RegistrationPage> {
   String name;
   double age;
 
+  final dbHelper = DBHelper.instance;
+
+  Future<void> _register() async {
+    int flag = -1;
+    if (name.trim() != "" && age.toInt() > 10 && age.toInt() < 91) {
+      if (selected == gender.male) {
+        flag = await dbHelper.insertRow('userinfo', {
+          'id': 1,
+          'fullname': name.trim(),
+          'age': age.toInt(),
+          'gender': 'M'
+        });
+      } else if (selected == gender.female) {
+        flag = await dbHelper.insertRow('userinfo', {
+          'id': 1,
+          'fullname': name.trim(),
+          'age': age.toInt(),
+          'gender': 'F'
+        });
+      }
+    }
+    if (flag != -1) {
+      Navigator.pushNamedAndRemoveUntil(
+          context, 'WelcomePage', (route) => false);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
+    dbHelper.getRowCount('userinfo').then((value) {
+      if (value > 0) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, 'WelcomePage', (route) => false);
+      }
+    });
   }
 
   @override
@@ -145,9 +179,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       SizedBox(height: context.percentHeight * 1),
                       TextField(
                         onChanged: (value) {
-                          setState(() {
-                            name = value;
-                          });
+                          name = value;
                         },
                         autofocus: false,
                         keyboardType: TextInputType.name,
@@ -242,18 +274,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           .makeCentered(),
                       Flexible(
                           child: HorizantalPicker(
-                        minValue: 5,
+                        minValue: 10,
+                        initialPosition: InitialPosition.center,
                         maxValue: 90,
-                        divisions: 85,
+                        divisions: 80,
                         suffix: " year",
                         showCursor: false,
                         backgroundColor: Colors.blue[200].withOpacity(0.75),
                         activeItemTextColor: Colors.black,
                         passiveItemsTextColor: Colors.blue,
                         onChanged: (value) {
-                          setState(() {
-                            age = value;
-                          });
+                          age = value;
                         },
                       )),
                     ],
@@ -265,7 +296,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             ),
             SizedBox(height: context.percentHeight * 3),
             FlatButton(
-              onPressed: () {},
+              onPressed: () => _register(),
               child: Container(
                 height: context.percentHeight * 7,
                 width: context.percentWidth * 40,
