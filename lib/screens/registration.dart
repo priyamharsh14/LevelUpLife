@@ -134,163 +134,168 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   padding: EdgeInsets.symmetric(
                       horizontal: context.percentWidth * 6,
                       vertical: context.percentHeight * 1.5),
-                  child: VStack(
-                    [
-                      SizedBox(
-                        height: context.percentHeight * 1.5,
-                      ),
-                      "[ENTER YOUR DETAILS]"
-                          .text
-                          .xl3
-                          .fontFamily("Oswald")
-                          .textStyle(TextStyle(shadows: [
-                            Shadow(
-                              blurRadius: 7.5,
-                              color: Colors.black,
-                            )
-                          ]))
-                          .center
-                          .color(Colors.white)
-                          .makeCentered(),
-                      SizedBox(
-                        height: context.percentHeight * 1,
-                      ),
-                      Container(
-                        color: Colors.blue[300],
-                        height: 1,
-                        width: context.percentWidth * 60,
-                      ),
-                      SizedBox(
-                        height: context.percentHeight * 1,
-                      ),
-                      'NAME:'
-                          .text
-                          .xl2
-                          .fontFamily("Oswald")
-                          .textStyle(TextStyle(shadows: [
-                            Shadow(
-                              blurRadius: 7.5,
-                              color: Colors.black,
-                            )
-                          ]))
-                          .center
-                          .color(Colors.white)
-                          .makeCentered(),
-                      SizedBox(height: context.percentHeight * 1),
-                      TextField(
-                        onChanged: (value) {
-                          name = value;
-                        },
-                        autofocus: false,
-                        keyboardType: TextInputType.name,
-                        style: TextStyle(fontFamily: 'Oswald', fontSize: 18),
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                          filled: true,
-                          hintText: 'Enter your name',
-                          fillColor: Colors.blue[200].withOpacity(0.85),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.blue[300], width: 1),
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.blue[100], width: 2),
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                  child: SingleChildScrollView(
+                    child: VStack(
+                      [
+                        SizedBox(
+                          height: context.percentHeight * 1.5,
+                        ),
+                        "[ENTER YOUR DETAILS]"
+                            .text
+                            .xl3
+                            .fontFamily("Oswald")
+                            .textStyle(TextStyle(shadows: [
+                              Shadow(
+                                blurRadius: 7.5,
+                                color: Colors.black,
+                              )
+                            ]))
+                            .center
+                            .color(Colors.white)
+                            .makeCentered(),
+                        SizedBox(
+                          height: context.percentHeight * 1,
+                        ),
+                        Container(
+                          color: Colors.blue[300],
+                          height: 1,
+                          width: context.percentWidth * 60,
+                        ),
+                        SizedBox(
+                          height: context.percentHeight * 1,
+                        ),
+                        'NAME:'
+                            .text
+                            .xl2
+                            .fontFamily("Oswald")
+                            .textStyle(TextStyle(shadows: [
+                              Shadow(
+                                blurRadius: 7.5,
+                                color: Colors.black,
+                              )
+                            ]))
+                            .center
+                            .color(Colors.white)
+                            .makeCentered(),
+                        SizedBox(height: context.percentHeight * 1),
+                        TextField(
+                          onChanged: (value) {
+                            name = value;
+                          },
+                          autofocus: false,
+                          keyboardType: TextInputType.name,
+                          style: TextStyle(fontFamily: 'Oswald', fontSize: 18),
+                          textAlign: TextAlign.center,
+                          decoration: InputDecoration(
+                            filled: true,
+                            hintText: 'Enter your name',
+                            fillColor: Colors.blue[200].withOpacity(0.85),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.blue[300], width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.blue[100], width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: context.percentHeight * 1),
-                      'GENDER: '
-                          .text
-                          .xl2
-                          .fontFamily("Oswald")
-                          .textStyle(TextStyle(shadows: [
-                            Shadow(
-                              blurRadius: 7.5,
-                              color: Colors.black,
-                            )
-                          ]))
-                          .center
-                          .color(Colors.white)
-                          .makeCentered(),
-                      HStack([
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selected = gender.male;
-                            });
-                          },
-                          child: BoxCard(
-                            height: context.percentHeight * 15,
-                            width: context.percentWidth * 25,
-                            icon: FontAwesomeIcons.mars,
-                            label: 'MALE',
-                            color: selected == gender.male
-                                ? Colors.lightBlue[400]
-                                : Colors.blue[600],
+                        SizedBox(height: context.percentHeight * 1),
+                        'GENDER: '
+                            .text
+                            .xl2
+                            .fontFamily("Oswald")
+                            .textStyle(TextStyle(shadows: [
+                              Shadow(
+                                blurRadius: 7.5,
+                                color: Colors.black,
+                              )
+                            ]))
+                            .center
+                            .color(Colors.white)
+                            .makeCentered(),
+                        HStack([
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                selected = gender.male;
+                              });
+                            },
+                            child: BoxCard(
+                              height: context.percentHeight * 15,
+                              width: context.percentWidth * 25,
+                              icon: FontAwesomeIcons.mars,
+                              label: 'MALE',
+                              color: selected == gender.male
+                                  ? Colors.lightBlue[400]
+                                  : Colors.blue[600],
+                            ),
                           ),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                selected = gender.female;
+                              });
+                            },
+                            child: BoxCard(
+                              height: context.percentHeight * 15,
+                              width: context.percentWidth * 25,
+                              icon: FontAwesomeIcons.venus,
+                              label: 'FEMALE',
+                              color: selected == gender.female
+                                  ? Colors.lightBlue[400]
+                                  : Colors.blue[600],
+                            ),
+                          )
+                        ]),
+                        SizedBox(height: context.percentHeight * 1),
+                        'AGE: '
+                            .text
+                            .xl2
+                            .fontFamily("Oswald")
+                            .textStyle(TextStyle(shadows: [
+                              Shadow(
+                                blurRadius: 7.5,
+                                color: Colors.black,
+                              )
+                            ]))
+                            .center
+                            .color(Colors.white)
+                            .makeCentered(),
+                        Flexible(
+                            child: HorizantalPicker(
+                          minValue: 10,
+                          initialPosition: InitialPosition.center,
+                          maxValue: 90,
+                          divisions: 80,
+                          suffix: " year",
+                          showCursor: false,
+                          backgroundColor: Colors.blue[200].withOpacity(0.75),
+                          activeItemTextColor: Colors.black,
+                          passiveItemsTextColor: Colors.blue,
+                          onChanged: (value) {
+                            age = value;
+                          },
+                        )),
+                        Container(
+                          color: Colors.blue[300],
+                          height: 1,
+                          width: context.percentWidth * 60,
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selected = gender.female;
-                            });
-                          },
-                          child: BoxCard(
-                            height: context.percentHeight * 15,
-                            width: context.percentWidth * 25,
-                            icon: FontAwesomeIcons.venus,
-                            label: 'FEMALE',
-                            color: selected == gender.female
-                                ? Colors.lightBlue[400]
-                                : Colors.blue[600],
-                          ),
-                        )
-                      ]),
-                      SizedBox(height: context.percentHeight * 1),
-                      'AGE: '
-                          .text
-                          .xl2
-                          .fontFamily("Oswald")
-                          .textStyle(TextStyle(shadows: [
-                            Shadow(
-                              blurRadius: 7.5,
-                              color: Colors.black,
-                            )
-                          ]))
-                          .center
-                          .color(Colors.white)
-                          .makeCentered(),
-                      Flexible(
-                          child: HorizantalPicker(
-                        minValue: 10,
-                        initialPosition: InitialPosition.center,
-                        maxValue: 90,
-                        divisions: 80,
-                        suffix: " year",
-                        showCursor: false,
-                        backgroundColor: Colors.blue[200].withOpacity(0.75),
-                        activeItemTextColor: Colors.black,
-                        passiveItemsTextColor: Colors.blue,
-                        onChanged: (value) {
-                          age = value;
-                        },
-                      )),
-                      Container(
-                        color: Colors.blue[300],
-                        height: 1,
-                        width: context.percentWidth * 60,
-                      ),
-                    ],
-                    alignment: MainAxisAlignment.center,
-                    crossAlignment: CrossAxisAlignment.center,
+                      ],
+                      alignment: MainAxisAlignment.center,
+                      crossAlignment: CrossAxisAlignment.center,
+                    ),
                   ),
                 ),
               ]),
