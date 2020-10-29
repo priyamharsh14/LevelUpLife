@@ -36,6 +36,7 @@ dependencies:
   delayed_display: ^1.0.3
   horizontal_picker: ^1.0.0
   font_awesome_flutter: ^8.8.1
+  animated_text_kit: ^2.5.1
 
 dev_dependencies:
   flutter_test:
