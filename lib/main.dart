@@ -1,3 +1,4 @@
+import 'package:LevelUpLife/screens/dashboard.dart';
 import 'package:LevelUpLife/screens/intro.dart';
 import 'package:LevelUpLife/screens/welcome.dart';
 import 'package:LevelUpLife/screens/registration.dart';
@@ -23,8 +24,8 @@ class MyApp extends StatelessWidget {
         'WelcomePage': (context) => WelcomePage(),
         'RegisterPage': (context) => RegistrationPage(),
         'IntroPage': (context) => IntroPage(),
+        'DashboardPage': (context) => DashboardPage(),
       },
-      //home: WelcomePage(),
     );
   }
 }

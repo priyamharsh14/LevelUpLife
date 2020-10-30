@@ -1,4 +1,5 @@
 import 'package:LevelUpLife/DB_helper.dart';
+import 'package:LevelUpLife/components/corners.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/animation.dart';
@@ -80,97 +81,54 @@ class _WelcomePageState extends State<WelcomePage>
                           radius: 1.2,
                         )),
                     child: Stack(
-                      children: [
-                        Positioned(
-                          top: 0,
-                          left: 0,
-                          child: RotatedBox(
-                            quarterTurns: 0,
-                            child: Image.asset(
-                              'assets/images/corner.png',
-                              height: context.percentHeight * 8,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 0,
-                          right: 0,
-                          child: RotatedBox(
-                            quarterTurns: 1,
-                            child: Image.asset(
-                              'assets/images/corner.png',
-                              height: context.percentHeight * 8,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          left: 0,
-                          bottom: 0,
-                          child: RotatedBox(
-                            quarterTurns: 3,
-                            child: Image.asset(
-                              'assets/images/corner.png',
-                              height: context.percentHeight * 8,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          right: 0,
-                          bottom: 0,
-                          child: RotatedBox(
-                            quarterTurns: 2,
-                            child: Image.asset(
-                              'assets/images/corner.png',
-                              height: context.percentHeight * 8,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: context.percentWidth * 10),
-                          child: FutureBuilder(
-                            future: _getDisplayName(),
-                            builder: (context, snapshot) {
-                              switch (snapshot.connectionState) {
-                                case ConnectionState.waiting:
-                                  return const CircularProgressIndicator(
-                                    backgroundColor: Colors.blueAccent,
-                                  ).centered();
-                                default:
-                                  if (snapshot.hasError) {
-                                    return "[ERROR]\n${snapshot.error.toString()}"
-                                        .text
-                                        .lg
-                                        .fontFamily("Oswald")
-                                        .textStyle(TextStyle(shadows: [
-                                          Shadow(
-                                            blurRadius: 7.5,
-                                            color: Colors.black,
-                                          )
-                                        ]))
-                                        .center
-                                        .color(Colors.white)
-                                        .makeCentered();
-                                  } else {
-                                    return "[WELCOME, ${snapshot.data}]"
-                                        .text
-                                        .xl2
-                                        .fontFamily("Oswald")
-                                        .textStyle(TextStyle(shadows: [
-                                          Shadow(
-                                            blurRadius: 7.5,
-                                            color: Colors.black,
-                                          )
-                                        ]))
-                                        .center
-                                        .color(Colors.white)
-                                        .makeCentered();
+                      children: getImageCorners(context.percentHeight * 8) +
+                          [
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: context.percentWidth * 10),
+                              child: FutureBuilder(
+                                future: _getDisplayName(),
+                                builder: (context, snapshot) {
+                                  switch (snapshot.connectionState) {
+                                    case ConnectionState.waiting:
+                                      return const CircularProgressIndicator(
+                                        backgroundColor: Colors.blueAccent,
+                                      ).centered();
+                                    default:
+                                      if (snapshot.hasError) {
+                                        return "[ERROR]\n${snapshot.error.toString()}"
+                                            .text
+                                            .lg
+                                            .fontFamily("Oswald")
+                                            .textStyle(TextStyle(shadows: [
+                                              Shadow(
+                                                blurRadius: 7.5,
+                                                color: Colors.black,
+                                              )
+                                            ]))
+                                            .center
+                                            .color(Colors.white)
+                                            .makeCentered();
+                                      } else {
+                                        return "[WELCOME, ${snapshot.data}]"
+                                            .text
+                                            .xl2
+                                            .fontFamily("Oswald")
+                                            .textStyle(TextStyle(shadows: [
+                                              Shadow(
+                                                blurRadius: 7.5,
+                                                color: Colors.black,
+                                              )
+                                            ]))
+                                            .center
+                                            .color(Colors.white)
+                                            .makeCentered();
+                                      }
                                   }
-                              }
-                            },
-                          ),
-                        ),
-                      ],
+                                },
+                              ),
+                            ),
+                          ],
                     ),
                   ),
                 ),
@@ -182,7 +140,8 @@ class _WelcomePageState extends State<WelcomePage>
                     if (_isNewUser) {
                       Navigator.pushNamed(context, 'RegisterPage');
                     } else {
-                      // proceed to dashboard
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, 'DashboardPage', (route) => false);
                     }
                   },
                   child: DelayedDisplay(
@@ -204,73 +163,27 @@ class _WelcomePageState extends State<WelcomePage>
                         ),
                       ),
                       child: Stack(
-                        children: [
-                          Positioned(
-                            left: context.percentHeight * 0.5,
-                            top: context.percentHeight * 0.5,
-                            child: RotatedBox(
-                              quarterTurns: 0,
-                              child: Container(
-                                color: Colors.blue[300],
-                                width: context.percentWidth * 4,
-                                height: 1,
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            left: context.percentHeight * 0.5,
-                            top: context.percentHeight * 0.5,
-                            child: RotatedBox(
-                              quarterTurns: 1,
-                              child: Container(
-                                color: Colors.blue[300],
-                                width: context.percentWidth * 4,
-                                height: 1,
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            right: context.percentHeight * 0.5,
-                            bottom: context.percentHeight * 0.5,
-                            child: RotatedBox(
-                              quarterTurns: 0,
-                              child: Container(
-                                color: Colors.blue[300],
-                                width: context.percentWidth * 4,
-                                height: 1,
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            right: context.percentHeight * 0.5,
-                            bottom: context.percentHeight * 0.5,
-                            child: RotatedBox(
-                              quarterTurns: 1,
-                              child: Container(
-                                color: Colors.blue[300],
-                                width: context.percentWidth * 4,
-                                height: 1,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: context.percentWidth * 10),
-                            child: "[PROCEED]"
-                                .text
-                                .xl
-                                .fontFamily("Oswald")
-                                .textStyle(TextStyle(shadows: [
-                                  Shadow(
-                                    blurRadius: 7.5,
-                                    color: Colors.black,
-                                  )
-                                ]))
-                                .center
-                                .color(Colors.yellow[600])
-                                .makeCentered(),
-                          )
-                        ],
+                        children: getLineCorners(context.percentHeight * 0.5,
+                                context.percentWidth * 4) +
+                            [
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: context.percentWidth * 10),
+                                child: "[PROCEED]"
+                                    .text
+                                    .xl
+                                    .fontFamily("Oswald")
+                                    .textStyle(TextStyle(shadows: [
+                                      Shadow(
+                                        blurRadius: 7.5,
+                                        color: Colors.black,
+                                      )
+                                    ]))
+                                    .center
+                                    .color(Colors.yellow[600])
+                                    .makeCentered(),
+                              )
+                            ],
                       ),
                     ),
                   ),
