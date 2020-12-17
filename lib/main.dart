@@ -1,5 +1,7 @@
-import 'package:LevelUpLife/screens/welcome.dart';
-import 'package:LevelUpLife/screens/registration.dart';
+import 'package:LifeReboot/screens/dashboard.dart';
+import 'package:LifeReboot/screens/intro.dart';
+import 'package:LifeReboot/screens/welcome.dart';
+import 'package:LifeReboot/screens/registration.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,18 +13,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'LevelUpLife',
+      title: 'LifeReboot',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: 'WelcomePage',
+      initialRoute: 'IntroPage',
       routes: {
         'WelcomePage': (context) => WelcomePage(),
         'RegisterPage': (context) => RegistrationPage(),
+        'IntroPage': (context) => IntroPage(),
+        'DashboardPage': (context) => DashboardPage(),
       },
-      home: WelcomePage(),
     );
   }
 }

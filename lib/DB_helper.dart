@@ -2,7 +2,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DBHelper {
-  static final _dbName = "LevelUpLife.db";
+  static final _dbName = "LifeReboot.db";
   static final _dbVer = 1;
 
   // make this a singleton class
